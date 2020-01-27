@@ -9,7 +9,7 @@ Google translate for free -- based on httpx with proxy support. Let's hope it la
 or
 
 * Install (pip or whatever) necessary requirements, e.g. ```
-pip install requests_cache js2py``` or ```
+pip install httpx js2py``` or ```
 pip install -r requirements.txt```
 * Drop the file google_tr.py in any folder in your PYTHONPATH (check with import sys; print(sys.path)
 * or clone the repo (e.g., ```git clone https://github.com/ffreemt/google-tr-async-free.git``` or download https://github.com/ffreemt/google-tr-async-free/archive/master.zip and unzip) and change to the google-tr-free folder and do a ```
