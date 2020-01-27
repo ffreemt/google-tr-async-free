@@ -18,11 +18,22 @@ python setup.py develop```
 ### Usage
 
 ```
+import asyncio
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+arun = lambda x: loop.run_until_complete(x)
+
 from google_tr_async import google_tr_async
-print(google_tr_async('hello world'))  # ->'你好，世界'
-print(google_tr_async('hello world', to_lang='de'))  # ->'Hallo Welt'
-print(google_tr_async('hello world', to_lang='fr'))  # ->'Bonjour le monde'
-print(google_tr_async('hello world', to_lang='ja'))  # ->'こんにちは世界'
+_ = [google_tr_async('hello world'),
+  google_tr_async('hello world', to_lang='de'),
+  google_tr_async('hello world', to_lang='fr'),
+  google_tr_async('hello world', to_lang='ja')]
+res = arun(asyncio.gather(*_))
+
+print(res[0])  # ->'你好，世界'
+print(res[1])  # ->'Hallo Welt'
+print(res[2])  # ->'Bonjour le monde'
+print(res[3])  # ->'こんにちは世界'
 ```
 
 ### Acknowledgments
