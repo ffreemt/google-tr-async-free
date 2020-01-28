@@ -9,7 +9,7 @@ Google translate for free -- based on httpx with proxy support. Let's hope it la
 or
 
 * Install (pip or whatever) necessary requirements, e.g. ```
-pip install httpx js2py``` or ```
+pip install httpx js2py loguru``` or ```
 pip install -r requirements.txt```
 * Drop the file google_tr.py in any folder in your PYTHONPATH (check with import sys; print(sys.path)
 * or clone the repo (e.g., ```git clone https://github.com/ffreemt/google-tr-async-free.git``` or download https://github.com/ffreemt/google-tr-async-free/archive/master.zip and unzip) and change to the google-tr-free folder and do a ```
@@ -24,6 +24,7 @@ asyncio.set_event_loop(loop)
 arun = lambda x: loop.run_until_complete(x)
 
 from google_tr_async import google_tr_async
+
 _ = [google_tr_async('hello world'),
   google_tr_async('hello world', to_lang='de'),
   google_tr_async('hello world', to_lang='fr'),
