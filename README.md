@@ -1,4 +1,4 @@
-# google-tr-async-free ![Python3637 package](https://github.com/ffreemt/google-tr-async-free/workflows/Python%203637%20package/badge.svg)
+# google-tr-async-free ![Python3637 package](https://github.com/ffreemt/google-tr-async-free/workflows/Python%203637%20package/badge.svg)[![PyPI version](https://badge.fury.io/py/google-tr-async-free.svg)](https://badge.fury.io/py/google-tr-async-free)
 
 Google translate for free -- based on httpx with proxy support. Let's hope it lasts.
 
