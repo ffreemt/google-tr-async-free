@@ -39,5 +39,8 @@ jobs:
       run: |
         twine check dist/*
     - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USER }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        twine upload dist/* --skip-existing -u ${{ secrets.PYPI_USER }} -p ${{ secrets.PYPI_PASSWORD }}
+        twine upload dist/* --skip-existing
