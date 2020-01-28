@@ -17,7 +17,7 @@ version, = re.findall(r"\n__version__\W*=\W*'([^']+)'", open('%s/__init__.py' % 
 README_rst = '%s/README.md' % Path(__file__).parent
 long_description = open(README_rst, encoding='utf-8').read() if Path(README_rst).exists() else ''
 
-install_requires = ['httpx', 'js2py', 'loguru',]
+install_requires = ['httpx', 'js2py', 'loguru', ]
 # 'diskcache', 'janus', 'pytest']
 
 setup(
