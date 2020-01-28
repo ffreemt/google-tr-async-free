@@ -38,3 +38,6 @@ jobs:
     - name: Twine check
       run: |
         twine check dist/*
+    - name: Publish to PyPI
+      run: |
+        twine upload --repository-url https://upload.pypi.org/legacy/ dist/* -u ${{ secrets.PYPI_USER }} -p ${{ secrets.PYPI_PASSWORD }}
