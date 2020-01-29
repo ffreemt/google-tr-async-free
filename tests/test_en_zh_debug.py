@@ -2,7 +2,7 @@
 test en-zh
 '''
 # import sys
-import pytest
+import pytest  # type: ignore
 
 from loguru import logger
 # sys.path.insert(0, '..')
@@ -22,8 +22,9 @@ async def test_0():
         The EU Copyright Directive is well-intentioned, requiring tech giants to license the right to reproduce copyrighted material on their own websites. However, the legislation as originally proposed would have made it impossible for Google to display brief snippets and photos from news stories in its search results without paying the news sites.
 
         Google last month showed how its news search results would appear without photos and text excerpts, rendering the service all but useless. The company had previously said that its only option might be to shut down Google News in Europe.'''
-    trtext = await google_tr_async(text)
-    assert len(google_tr_async.dual) == 6
+    trtext, proxy = await google_tr_async(text, debug=True)
+    # assert len(google_tr_async.dual) == 6
+    assert proxy is None
     assert len(trtext) > 200
 
 
@@ -31,10 +32,12 @@ async def test_0():
 async def test_1():
     ''' test 1 zh2en'''
     text = '这是测试'
-    trtext = await google_tr_async(text, to_lang='en')
+    trtext, proxy = await google_tr_async(text, to_lang='en', debug=True)
     logger.debug('trtext: %s' % trtext)
-    logger.debug('google_tr_async.dual: %s' % google_tr_async.dual)
+
+    # logger.debug('google_tr_async.dual: %s' % google_tr_async.dual)
     # assert len(google_tr_async.dual) == 6
     # assert google_tr_async.dual == 6
     # assert len(trtext) > 200
     assert trtext == 'This is a test'
+    assert proxy is None

@@ -4,6 +4,8 @@ google translate for free
 '''
 # pylint: disable=line-too-long, broad-except
 
+from typing import Union, Dict
+
 import sys
 import asyncio
 
@@ -60,19 +62,19 @@ GEN_TOKEN = js2py.eval_js(TL)
 HEADERS = {
     'User-Agent':
     'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'
-}
+}  # type: Dict[str, str]
 
 
-async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-locals
-        content,
-        from_lang='auto',
-        to_lang='zh-CN',
-        proxy=None,
-        timeout=4,
-        verify=False,
-        connect_timeout=8.0,
-        headers=None,
-        debug=False,
+async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-locals, too-many-branches
+        content: str,
+        from_lang: str = 'auto',
+        to_lang: str = 'zh-CN',
+        proxy: Union[str, None] = None,
+        timeout: float = 4,
+        verify: bool = False,
+        connect_timeout: float = 8.0,
+        headers: Union[dict, None] = None,
+        debug: bool = False,
 ):
     ''' google_tr_async '''
 
@@ -154,32 +156,40 @@ async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-local
     finally:
         logger.debug('resp: %s' % resp.text[:10])
 
+    if debug:
+        google_tr_async.resp = resp
+
     try:
         jdata = resp.json()
     except Exception as exc:  # pragma: no cover
-        jdata = str(exc)
+        jdata = [{'error': str(exc)}]
 
-    google_tr_async.json = jdata
+    # google_tr_async.json = jdata
 
     try:
         res = [elm for elm in jdata[0] if elm[0] or elm[1]]
     except Exception as exc:  # pragma: no cover
-        res = str(exc)
-
-    google_tr_async.dual = res
+        res = [str(exc)]
 
     if to_lang in ['zh-CN', 'zh']:
-        return ''.join([str(elm[0]) for elm in res])
+        _ = ''.join([str(elm[0]) for elm in res])
+    else:
+        _ = ' '.join([str(elm[0]) for elm in res])
 
-    return ' '.join([str(elm[0]) for elm in res])
+    if debug:
+        return _, proxy
+    return _
 
 
 def main():  # pragma: no cover
     ''' main '''
     from random import randint
 
+    # fetch English input if any
     args = sys.argv[1:]
-    if not args:
+    if args:
+        content = ' '.join(args)
+    else:
         content, *args = ['test ' + str(randint(1, 10000)), 'en', 'zh']
 
     loop = asyncio.new_event_loop()
