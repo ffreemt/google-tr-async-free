@@ -57,7 +57,10 @@ TL = \
 
 GEN_TOKEN = js2py.eval_js(TL)
 
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
+HEADERS = {
+    'User-Agent':
+    'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'
+}
 
 
 async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-locals
@@ -71,14 +74,14 @@ async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-local
         headers=None,
         debug=False,
 ):
-    ''' google_tr_async'''
+    ''' google_tr_async '''
 
     if not debug:
         logger.remove()
         logger.add(sys.stderr, level="INFO")
 
     if len(content) > 4891:  # pragma: no cover
-        logger.warning(' input longer than 4891, trmming...')
+        logger.warning(' input longer than 4891, trimming to 4891...')
         content = content[:4891]
 
     if headers is None:
@@ -94,7 +97,18 @@ async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-local
         sl=from_lang,
         tl=to_lang,
         hl=to_lang,
-        dt=["at", "bd", "ex", "ld", "md", "qca", "rw", "rm", "ss", "t", ],
+        dt=[
+            "at",
+            "bd",
+            "ex",
+            "ld",
+            "md",
+            "qca",
+            "rw",
+            "rm",
+            "ss",
+            "t",
+        ],
         ie="UTF-8",
         oe="UTF-8",
         clearbtn=1,
