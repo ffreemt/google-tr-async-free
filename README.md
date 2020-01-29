@@ -20,11 +20,12 @@ python setup.py develop```
 
 ```
 import asyncio
+
+from google_tr_async import google_tr_async
+
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
 arun = lambda x: loop.run_until_complete(x)
-
-from google_tr_async import google_tr_async
 
 _ = [google_tr_async('hello world'),
   google_tr_async('hello world', to_lang='de'),
