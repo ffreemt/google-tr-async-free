@@ -14,12 +14,12 @@ import js2py  # type: ignore
 import httpx  # type: ignore
 
 from loguru import logger
+
 # import pytest
 
 URL = 'http://translate.google.cn/translate_a/single'
 
-TL = \
-    """function RL(a, b) {
+TL = """function RL(a, b) {
         var t = "a";
         var Yb = "+";
         for (var c = 0; c < b.length - 2; c += 3) {
@@ -60,21 +60,20 @@ TL = \
 GEN_TOKEN = js2py.eval_js(TL)
 
 HEADERS = {
-    'User-Agent':
-    'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'
 }  # type: Dict[str, str]
 
 
 async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-locals, too-many-branches
-        content: str,
-        from_lang: str = 'auto',
-        to_lang: str = 'zh-CN',
-        proxy: Union[str, None] = None,
-        timeout: float = 4,
-        verify: bool = False,
-        connect_timeout: float = 8.0,
-        headers: Union[dict, None] = None,
-        debug: bool = False,
+    content: str,
+    from_lang: str = 'auto',
+    to_lang: str = 'zh-CN',
+    proxy: Union[str, None] = None,
+    timeout: float = 4,
+    verify: bool = False,
+    connect_timeout: float = 8.0,
+    headers: Union[dict, None] = None,
+    debug: bool = False,
 ):
     ''' google_tr_async '''
 
@@ -99,18 +98,7 @@ async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-local
         sl=from_lang,
         tl=to_lang,
         hl=to_lang,
-        dt=[
-            "at",
-            "bd",
-            "ex",
-            "ld",
-            "md",
-            "qca",
-            "rw",
-            "rm",
-            "ss",
-            "t",
-        ],
+        dt=["at", "bd", "ex", "ld", "md", "qca", "rw", "rm", "ss", "t"],
         ie="UTF-8",
         oe="UTF-8",
         clearbtn=1,
@@ -127,11 +115,11 @@ async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-local
     # timeout exception
     try:
         async with httpx.AsyncClient(
-                proxies=proxy,
-                timeout=timeo,
-                trust_env=False,
-                headers=headers,
-                verify=verify,
+            proxies=proxy,
+            timeout=timeo,
+            trust_env=False,
+            headers=headers,
+            verify=verify,
         ) as client:
             try:
                 # resp = loop.run_until_complete(client.get(*args))
@@ -141,18 +129,12 @@ async def google_tr_async(  # pylint: disable=too-many-arguments, too-many-local
             except Exception as exc:  # pragma: no cover
                 logger.error(exc)
                 resp = httpx.Response(
-                    status_code=499,
-                    request=req,
-                    content=str(exc).encode(),
+                    status_code=499, request=req, content=str(exc).encode()
                 )
 
     except Exception as exc:  # pragma: no cover
         logger.error('timeout: %s' % exc)
-        resp = httpx.Response(
-            status_code=499,
-            request=req,
-            content=str(exc).encode(),
-        )
+        resp = httpx.Response(status_code=499, request=req, content=str(exc).encode())
     finally:
         logger.debug('resp: %s' % resp.text[:10])
 
