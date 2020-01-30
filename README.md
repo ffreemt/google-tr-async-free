@@ -1,5 +1,5 @@
 # google-tr-async-free
-![Python3637 package](https://github.com/ffreemt/google-tr-async-free/workflows/Python%203637%20package/badge.svg)[![codecov](https://codecov.io/gh/ffreemt/google-tr-async-free/branch/master/graph/badge.svg)](https://codecov.io/gh/ffreemt/google-tr-async-free)![httpx](httpx.svg)[![PyPI version](https://badge.fury.io/py/google-tr-async-free.svg)](https://badge.fury.io/py/google-tr-async-free)![status](https://img.shields.io/badge/status-alpha-orange.svg)![Python](https://img.shields.io/badge/python-3.6%2B-blue.svg)
+![Python3637 package](https://github.com/ffreemt/google-tr-async-free/workflows/Python%203637%20package/badge.svg)[![codecov](https://codecov.io/gh/ffreemt/google-tr-async-free/branch/master/graph/badge.svg)](https://codecov.io/gh/ffreemt/google-tr-async-free)![httpx](https://img.shields.io/badge/httpx-httpx-blue.svg)[![PyPI version](https://badge.fury.io/py/google-tr-async-free.svg)](https://badge.fury.io/py/google-tr-async-free)![status](https://img.shields.io/badge/status-alpha-orange.svg)
 
 Google translate for free -- based on httpx with proxy support. Let's hope it lasts.
 
